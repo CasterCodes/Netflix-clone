@@ -31,6 +31,7 @@ export const Link = styled.a`
   margin-bottom: 20px;
   font-size: 15px;
   text-decoration: none;
+  cursor: pointer;
 `;
 
 export const Title = styled.p`

@@ -28,7 +28,7 @@ export const FooterContainer = () => {
           <Footer.Link>Speed Test</Footer.Link>
         </Footer.Column>
         <Footer.Column>
-          <Footer.Link>Media Center</Footer.Link>
+          <Footer.Link href="./media">Media Center</Footer.Link>
           <Footer.Link>Buy Gifts Cards</Footer.Link>
           <Footer.Link>Cookie Preferences</Footer.Link>
           <Footer.Link>Legal Notices</Footer.Link>
