@@ -20,11 +20,11 @@ export const Frame = styled.div`
 export const Body = styled.div`
   max-width: 1200px;
   transition: max-height 0.25s cubic bezier(0.5, 0, 0.1, 1);
-  font-size: 26px;
+
   font-weight: normal;
   line-height: normal;
   background-color: #303030;
-  padding: 0.8px 0.2px;
+  padding: 0.8px 2px;
 
   white-space: pre-wrap;
   user-select: none;
@@ -32,6 +32,10 @@ export const Body = styled.div`
     font-size: 16px;
     line-height: 22px;
   }
+`;
+
+export const Text = styled.p`
+  font-size: 26px;
 `;
 
 export const Header = styled.div`
@@ -60,7 +64,8 @@ export const Header = styled.div`
 export const Item = styled.div`
   color: white;
   margin-bottom: 10px;
-  max-width: 670px;
+  max-width: 678px;
+
   &:first-of-type {
     margin-top: 3em;
   }

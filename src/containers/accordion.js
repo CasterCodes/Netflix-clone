@@ -9,7 +9,9 @@ const AccordionContainer = () => {
       {faqsData.map((item) => (
         <Accordion.Item key={item.id}>
           <Accordion.Header>{item.header}</Accordion.Header>
-          <Accordion.Body>{item.body}</Accordion.Body>
+          <Accordion.Body>
+            <Accordion.Text>{item.body}</Accordion.Text>
+          </Accordion.Body>
         </Accordion.Item>
       ))}
     </Accordion>
