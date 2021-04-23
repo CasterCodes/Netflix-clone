@@ -13,7 +13,11 @@ import {
 const ToggleContext = createContext();
 
 const Accordion = ({ children, ...restProps }) => {
-  return <Inner {...restProps}>{children}</Inner>;
+  return (
+    <Container>
+      <Inner {...restProps}>{children}</Inner>
+    </Container>
+  );
 };
 Accordion.Container = ({ children, ...restProps }) => {
   return <Container {...restProps}>{children}</Container>;
