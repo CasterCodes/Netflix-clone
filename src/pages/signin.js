@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import HeaderContainer from "../containers/header";
 import { FooterContainer } from "../containers/footer";
 import { Form } from "../components";
-
+import { FirebaseContext } from "../context/firebase";
+import * as ROUTES from "../constants/routes";
 const Signin = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  //context
+  const { firebase } = useContext(FirebaseContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
       setError("Please fill all the fields");
     }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        history.push(ROUTES.BROWSE);
+      })
+      .catch((error) => {
+        setEmail("");
+        setPassword("");
+        setError(error.message);
+      });
   };
   const isInvalid = email === "" || password === "";
   return (
