@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  height: 70px;
+  height: 100%;
   margin-top: 20px;
   flex-wrap: wrap;
 
@@ -26,31 +26,31 @@ export const Text = styled.p`
 export const Button = styled.button`
   display: flex;
   align-items: center;
-  height: 100%;
+  height: 70px;
   background-color: #e50914;
   color: white;
   text-transform: uppercase;
-  padding:0px 32px;
-  font-size:26px;
-  border:0;
-  cursor-pointer;
+  padding: 0px 32px;
+  font-size: 26px;
+  border: 0;
+  cursor: pointer;
 
- &:hover {
-     background-color:#f40612;
- }
+  &:hover {
+    background-color: #f40612;
+  }
   img {
-      filter:brightness(0) invert(1);
-      width:24px;
-      @media (max-width:1000px) {
-          width:16px;
-      }
+    filter: brightness(0) invert(1);
+    width: 24px;
+    @media (max-width: 1000px) {
+      width: 16px;
+    }
   }
 
-  @media (max-width:1000px) {
-       height:50px;
-       font-size:16px;
-       margin-top:20px;
-       font-weight:bold;
+  @media (max-width: 1000px) {
+    height: 50px;
+    font-size: 16px;
+    margin-top: 20px;
+    font-weight: bold;
   }
 `;
 

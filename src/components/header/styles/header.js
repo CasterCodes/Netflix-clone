@@ -41,7 +41,7 @@ export const Container = styled.div`
 export const ButtonLink = styled(ReactRouterLink)`
   display: block;
   background-color: #e50914;
-  width: 84px;
+  // width: 75px;
   height: fit-content;
   color: white;
   border: 0;
