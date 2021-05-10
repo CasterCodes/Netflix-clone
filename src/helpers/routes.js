@@ -25,13 +25,21 @@ export const ProtectedRoute = ({ user, children, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={(location) => {
+      render={({ location }) => {
         if (user) {
+          console.log(children);
           return children;
         }
 
         if (!user) {
-          return <Redirect to={{ pathname: "signin", state: location }} />;
+          return (
+            <Redirect
+              to={{
+                pathname: "signin",
+                state: { from: location },
+              }}
+            />
+          );
         }
 
         return null;
