@@ -27,7 +27,6 @@ export const ProtectedRoute = ({ user, children, ...rest }) => {
       {...rest}
       render={({ location }) => {
         if (user) {
-          console.log(children);
           return children;
         }
 
