@@ -10,6 +10,7 @@ import * as ROUTES from "../constants/routes";
 const BrowseContainer = ({ slides }) => {
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
   const { user } = useAuthListener();
   const { firebase } = useContext(FirebaseContext);
   useEffect(() => {
@@ -34,6 +35,10 @@ const BrowseContainer = ({ slides }) => {
             <Header.TextLink>Films</Header.TextLink>
           </Header.Group>
           <Header.Group>
+            <Header.Search
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+            />
             <Header.Profile>
               <Header.Picture src={`/images/users/${user.photoURL}.png`} />
               <Header.Dropdown>
@@ -60,6 +65,7 @@ const BrowseContainer = ({ slides }) => {
             he projects in a futile attempt to feel like he's part of the world
             around him.
           </Header.Text>
+          <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
     </>
