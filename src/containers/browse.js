@@ -2,12 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import SelectProfileContainer from "./profiles";
 import useAuthListener from "../hooks/use-auth-listener";
 import { FirebaseContext } from "../context/firebase";
-import { Loading, Header } from "../components";
+import { Loading, Header, Card, Player } from "../components";
+import Fuse from "fuse.js";
 import logo from "../logo.svg";
 
 import * as ROUTES from "../constants/routes";
 
 const BrowseContainer = ({ slides }) => {
+  const [category, setCategory] = useState("series");
+  const [slideRows, setSlidesRows] = useState([]);
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,6 +22,23 @@ const BrowseContainer = ({ slides }) => {
     }, 3000);
   }, [profile.displayName]);
 
+  useEffect(() => {
+    setSlidesRows(slides[category]);
+  }, [slides, category]);
+
+  useEffect(() => {
+    const fuse = new Fuse(slideRows, {
+      keys: ["data.description", "data.title", "data.genre"],
+    });
+
+    const results = fuse.search(searchTerm).map(({ item }) => item);
+
+    if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+      setSlidesRows(results);
+    } else {
+      setSlidesRows(slides[category]);
+    }
+  }, [searchTerm]);
   return profile.displayName ? (
     <>
       {loading ? (
@@ -31,8 +51,16 @@ const BrowseContainer = ({ slides }) => {
         <Header.Container>
           <Header.Group>
             <Header.Logo to={ROUTES.HOME} src={logo} alt="netflix" />
-            <Header.TextLink>Series</Header.TextLink>
-            <Header.TextLink>Films</Header.TextLink>
+            <Header.TextLink
+              active={category === "series" ? true : false}
+              onClick={() => setCategory("series")}>
+              Series
+            </Header.TextLink>
+            <Header.TextLink
+              active={category === "films" ? true : false}
+              onClick={() => setCategory("films")}>
+              Films
+            </Header.TextLink>
           </Header.Group>
           <Header.Group>
             <Header.Search
@@ -68,6 +96,32 @@ const BrowseContainer = ({ slides }) => {
           <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
+      <Card.Group>
+        {slideRows.map((slideItem) => (
+          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+            <Card.Title>{slideItem.title}</Card.Title>
+            <Card.Entities>
+              {slideItem.data.map((item) => (
+                <Card.Item key={item.docId} item={item}>
+                  <Card.Image
+                    src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                  />
+                  <Card.Meta>
+                    <Card.Subtitle>{item.title}</Card.Subtitle>
+                    <Card.Text>{item.description}</Card.Text>
+                  </Card.Meta>
+                </Card.Item>
+              ))}
+            </Card.Entities>
+            <Card.Feature category={category}>
+              <Player>
+                <Player.Button />
+                <Player src="/videos/bunny.mp4" />
+              </Player>
+            </Card.Feature>
+          </Card>
+        ))}
+      </Card.Group>
     </>
   ) : (
     <SelectProfileContainer user={user} setProfile={setProfile} />
