@@ -7,9 +7,9 @@ export const PlayerContext = createContext();
 const Player = ({ children, ...restProps }) => {
   const [showPlayer, setShowPlayer] = useState(false);
   return (
-    <PlayerContext value={{ showPlayer, setShowPlayer }}>
+    <PlayerContext.Provider value={{ showPlayer, setShowPlayer }}>
       <Container {...restProps}>{children}</Container>
-    </PlayerContext>
+    </PlayerContext.Provider>
   );
 };
 
@@ -30,11 +30,14 @@ Player.Video = function PlayerVideo({ src }) {
     )
   );
 };
+
 Player.Button = function PlayerButton({ ...restProps }) {
   const { showPlayer, setShowPlayer } = useContext(PlayerContext);
 
   return (
-    <Button onClick={() => setShowPlayer((showPlayer) => !showPlayer)}>
+    <Button
+      {...restProps}
+      onClick={() => setShowPlayer((showPlayer) => !showPlayer)}>
       Play
     </Button>
   );
