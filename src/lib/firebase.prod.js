@@ -6,12 +6,12 @@ import { seedDatabase } from "../seed";
 // we need to seed the database
 
 const config = {
-  apiKey: "AIzaSyCzNw8d-tbP8pr1hZ4niNHp9sOp-mgySo0",
-  authDomain: "flix-net1997.firebaseapp.com",
+  apiKey: "***",
+  authDomain: "****",
   projectId: "flix-net1997",
   storageBucket: "flix-net1997.appspot.com",
-  messagingSenderId: "643033667970",
-  appId: "1:643033667970:web:c43529931529b496ead79b",
+  messagingSenderId: "***",
+  appId: "***",
 };
 
 const firebase = Firebase.initializeApp(config);
